@@ -196,14 +196,133 @@ export const useAppStore = create<AppStore>(() => ({
             ]
         },
         {
-            id: 1002,
-            name: "Linux Administration",
+            id: 1003,
+            name: "Advanced Java",
             solutions: [
+                {
+                    id: 1013,
+                    question: "What are the advantages of Spring Framework?",
+                    Answer:
+                        <div className="pl-4 bg-slate-600 rounded-md">
+                            <code>
+                                <ol className="list-inside list-decimal">
+                                    <li>Spring Framework uses POJOs (Normal java classes) for building application rather than heavy EJB (Enter Java Beans) making the overall application light weight and fast.</li>
+                                    <li>It is build on top of existing technologies and libraries like JDBC, ORM, JPA, Hibernate, Logging Frameworks, Servlets, JSP etc.</li>
+                                    <li>IOC container is the core of spring framework that handles object creation, dependency injection allowing developers to focus on logic rather than integrating different components manually.</li>
+                                    <li>It has better Web Mvc Support for creating web application better than struts.</li>
+                                    <li>By design it forces developers to write clean and loose coupled code that is easy to maintain.</li>
+                                    <li>spring framework is a set of various modules, where we can include only those we actually need in out application such as Spring core, jdbc, web mvc, security etc.</li>
+                                    <li>It allows flexible project configuration using XML, java classes or annotations. We can choose any of these ways to configure the project.</li>
+                                    <li>It handles many things internally like creating objects, wiring dependencies, configuations, environments etc reducing a lot of boilerplate code.</li>
+                                    <li>It has very large and active community and exellent documentation support.</li>
+                                </ol>
+                            </code>
+                        </div>
+                },
+                {
+                    id: 1014,
+                    question: "Explain Generic Servlets Http Servlet and Http Session.",
+                    Answer:
+                        <div className="pl-4 bg-slate-600 rounded-md">
+                            <code>
+                                <ol className="list-inside list-decimal">
+                                    <li><span className="text-black rounded px-1 bg-slate-200">Servlet → GenericServlet → HttpServlet</span></li>
+                                    <li><span className="text-black rounded bg-slate-200 px-1">GenericServlet</span> : </li>
+                                    <ol className="ml-4 list-inside list-[lower-alpha]">
+                                        <li>It is an abstract class that extends Servlet interface and implements init() and destroy() methods.</li>
+                                        <li>In order to create servlet using this class we first create a java class and extend this class then implement the service() method only. For rest methods it gives implementations.</li>
+                                        <li>This class is independent of protocols and does not have support for HTTP specific features like cookies, query parameters, GET, POST requests, http header, body etc.</li>
+                                    </ol>
+                                    <li><span className="text-black rounded bg-slate-200 px-1">HttpServlet</span> : </li>
+                                    <ol className="ml-4 list-inside list-[lower-alpha]">
+                                        <li>It is also an abstract class that extends GenericServlet and implememts service() method.</li>
+                                        <li>For creating servlets, we create a java class and extends this class then override methods such as doGet(),doPost() etc. We do no implement service() method here.</li>
+                                        <li>This class is specifically designed to work with http protocol.</li>
+                                        <li>By implemeting doGet(), doPost() etc we can create methods that respond to http GET, POST etc requests.</li>
+                                        <li>It also support Http Headers, query parameters, cookies, sessions, status code, redirects etc which are not there in GenericSevlet.</li>
+                                    </ol>
+                                    <li><span className="text-black rounded bg-slate-200 px-1">HttpSession</span> : </li>
+                                    <ol className="ml-4 list-inside list-[lower-alpha]">
+                                        <li>HttpSession is a class that helps the server to remember user info and activities throughout multiple requests.</li>
+                                        <li>When the user makes request for the first time it sends a session cookie with some id.</li>
+                                        <li>Now in subsequent request the browser automatically adds this cookie to the http request that server uses to know which user is making request.</li>
+                                        <li>Often used in cases like login-logout, shopping cart, or anthing that is used accross mupltiple pages.</li>
+                                    </ol>
+                                </ol>
+                            </code>
+                        </div>
+                },
+                {
+                    id: 1015,
+                    question: "Write steps for accessing database using JDBC api.",
+                    Answer:
+                        <div className="pl-4 bg-slate-600 rounded-md">
+                            <code>
+                                <ol className="list-inside list-decimal">
+                                    <li>JDBC stands for java database connectivity.</li>
+                                    <li>It is a Java API for connecting a java application with a relational database like mysql, postgresql, mssql server etc.</li>
+                                    <li>It consists of following steps:</li>
+                                    <ol className="list-inside list-[lower-alpha] ml-4" >
+                                        <li>Create a java program and download jdbc driver as per the databasee.</li>
+                                        <li>First load the jdbc driver using <span className="bg-slate-200 text-black rounded px-1">Class.forName("com.mysql.cj.jdbc.Driver")</span></li>
+                                        <li>Create connection using database url, username and password <span className="bg-slate-200 text-black rounded px-1">Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/database_name", "user", "password")</span></li>
+                                        <li>Create an SQL statement:</li>
+                                        <ul className="list-inside list-disc ml-4">
+                                            <li><span className="rounded text-black bg-slate-200 px-1">Statement</span> : used when executing queries without any parameters such as DDL queries.</li>
+                                            <li><span className="rounded text-black bg-slate-200 px-1">PreparedStatement</span> : used when executing queries with dynamic values such as DML queries.</li>
+                                            <li><span className="rounded text-black bg-slate-200 px-1">CallableStatement</span> : used for invoking stored procedures.</li>
+                                            <li>eg. <span className="rounded text-black bg-slate-200 px-1">Statement stmt = connection.createStatement("SELECT * FROM Employees")</span></li>
+                                        </ul>
+                                        <li>Execute the statement:</li>
+                                        <ul className="list-inside list-disc ml-4">
+                                            <li><span className="text-black px-1 bg-slate-200 rounded">executeQuery()</span> : used when querying data.</li>
+                                            <li><span className="text-black px-1 bg-slate-200 rounded">executeUpdate()</span> : used when updating, inserting or deleting data.</li>
+                                        </ul>
+                                        <li>Process the ResultSet returned by the query.</li>
+                                        <ul className="list-inside list-disc ml-4">
+                                            <li><span className="text-black px-1 bg-slate-200 rounded">ResultSet.next()</span> : can be used to go to next record.</li>
+                                            <li><span className="text-black px-1 bg-slate-200 rounded">ResultSet.getInt("column name"), ResultSet.getString("column name")</span> : can be used to get values of current record.</li>
+                                        </ul>
+                                        <li>Then <span className="text-black px-1 rounded bg-slate-200">commit()</span> or <span className="text-black px-1 rounded bg-slate-200">rollback()</span> the query if want.</li>
+                                        <li>Finally close the ResultSet, Statement and Connection to free memory and release database connection.</li>
+                                    </ol>
+                                </ol>
+                            </code>
+                        </div>
+                },
+                {
+                    id: 1016,
+                    question: "What is JSP? Explain JSP directives.",
+                    Answer:
+                        <div className="pl-4 bg-slate-600 rounded-md">
+                            <code>
+                                <ol className="list-inside list-decimal">
+                                    <li>JSP stands for Java Server Pages.</li>
+                                    <li>Main goal of JSP is to allow writting HTML and Java code together in a single file.</li>
+                                    <li>Servlet and JSP have same capabilities the only difference is that they allow creating dynamic html pages easier than a servlet.</li>
+                                    <li>JSP is also compiled to a sevlet when it runs for the first time.</li>
+                                    <li>JSP runs on the server executes java code inside it and final output is sent to the client not the original code file.</li>
+                                    <li>JSP uses speacial tags to embbed java code: </li>
+                                    <ul className="ml-4 list-inline list-disc">
+                                        <li><span className="text-black rounded bg-slate-200 px-1">{"<%! %>"}</span>: Declarations are used for declaring variables, classes, methods etc.</li>
+                                        <li><span className="text-black rounded bg-slate-200 px-1">{"<% %>"}</span>: Scriptlets are used to write java code.</li>
+                                        <li><span className="text-black rounded bg-slate-200 px-1">{"<%= %>"}</span>: Expression are used to write java expressions and output is directly printed in HTML without having to use println().</li>
+                                    </ul>
+                                    <li><span className="text-black rounded bg-slate-200 px-1">JSP Directives: </span></li>
+                                    <ul className="ml-4 list-inline list-disc">
+                                        <li><span className="text-black rounded bg-slate-200 px-1">Page</span> : page directives specify how the jsp page should be handled. eg. <span className="text-black rounded bg-slate-200 px-1">{"<%@ page attribute='value' %>"}</span>. Attributes can be import, language, contentType, errorPage etc.</li>
+                                        <li><span className="text-black rounded bg-slate-200 px-1">Include</span>: include directives are used to include other html or jsp files in current file. Often used to repetitive UI elements like navbar, footer, sidebar etc. eg. <span className="text-black rounded bg-slate-200 px-1">{"<%@ include file='footer.jsp' %>"}</span>.</li>
+                                        <li><span className="text-black rounded bg-slate-200 px-1">Taglib</span>:  taglib directives are used for adding custom tag libraries like JSTL. eg. <span className="text-black rounded bg-slate-200 px-1">{"<%@ taglib uri='' prefix='' %>"}</span></li>
+                                    </ul>
+                                </ol>
+                            </code>
+                        </div>
+                },
             ]
         },
         {
-            id: 1003,
-            name: "Advanced Java",
+            id: 1002,
+            name: "Linux Administration",
             solutions: [
             ]
         },
