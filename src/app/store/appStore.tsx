@@ -324,6 +324,120 @@ export const useAppStore = create<AppStore>(() => ({
             id: 1002,
             name: "Linux Administration",
             solutions: [
+                {
+                    id: 1017,
+                    question: "Write short note on installing linux. ",
+                    Answer:
+                        <div className="pl-4 bg-slate-600 rounded-md">
+                            <code>
+                                <ol className="list-inside list-decimal">
+                                    <li>We can install linux os in several ways but using a virtual machine is a better choise as it allows running both host and vm at the same time without affecting each other.</li>
+                                    <li>This allows us to learnt, test, practice servers using linux.</li>
+                                    <li>Following are the steps to be followed to insatall and setup linux:</li>
+                                    <ul className="ml-4 list-inside list-disc">
+                                        <li>First go to RHEL official website and download the RHEL iso image file.</li>
+                                        <li>Then download any virtual machine plaform like virtual box or vm ware.</li>
+                                        <li>Create a virtual machine in vm ware and choose iso image you downloaded and os as Linux.</li>
+                                        <li>Create a virtual disk and allocate <span className="text-black bg-slate-200 rounded px-1">30 to 40 GBs</span>. This virtual disk will store the Linux os.</li>
+                                        <li>Customize hardware options like <span className="text-black bg-slate-200 rounded px-1">Memory: 2 - 4 GBs , Processor: 2 - 4 cores, Network Adapter: Bridge or Nat, Diplay, USB and sound card etc</span>.</li>
+                                        <li>Start the virtual machine and select option install RHEL.</li>
+                                        <li>Installation will start and will show you installation screen.</li>
+                                        <li>Select you language.</li>
+                                        <li>Select virtual disk you created earlier as installation disk.</li>
+                                        <li>Select softwares and packages you want and choose Server With GUI that gives both GUI and Packages for working with variuos types of servers.</li>
+                                        <li>Set root password and create a new user account for system login.</li>
+                                        <li>Once done it will install all the packages then reboot the system.</li>
+                                        <li>Now login with the username and password you created.</li>
+                                        <li>After that register system with Red Hat to get system and security updates using <span className="text-black bg-slate-200 rounded px-1">sudo subscription-manager register --username 'user' --password 'pass' --auto-attach</span></li>
+                                        <li>Finally do <span className="text-black bg-slate-200 rounded px-1">dnf update</span> or <span className="text-black bg-slate-200 rounded px-1">yum update</span> to update system with latest security patches, others.</li>
+                                    </ul>
+                                </ol>
+                            </code>
+                        </div>
+                },
+                {
+                    id: 1018,
+                    question: "Explain working of gateways and routers in TCP/IP network.",
+                    Answer:
+                        <div className="pl-4 bg-slate-600 rounded-md">
+                            <code>
+                                <ol className="list-inside list-decimal">
+                                    <li>Router: </li>
+                                    <ul className="list-inside list-disc ml-4">
+                                        <li>Support we have a LAN of 10 compoters then all of these can communicate to each other direcly as they are in the same subnet e.g. pc 1 - 192.168.1.10, pc 2 - 192.168.1.12</li>
+                                        <li>But if these compoters need to communicate to a machine that is in another subnet like 10.0.0.2 so communication is not possible directly.</li>
+                                        <li>Here comes the router, a router is a device that connects two different network and routes packets using ip address. eg. pc 1 can now connect to internet or make request to machines in other subnets like 10.0.0.2, google.com etc.</li>
+                                        <li>A linux machine can also be configured as a router device that can connect multiple subnets with each other.</li>
+                                    </ul>
+                                    <li>Gateway: </li>
+                                    <ul className="list-inside list-disc ml-4">
+                                        <li>Gatewat is basically the IP address of the router.</li>
+                                        <li>eg. if our LAN has pc 1 - 192.168.1.10, pc 2 - 192.168.1.12 so they can talk to each other but if they want to access internet they need a router.</li>
+                                        <li>When they connect to the router all of these machines get a Default Gateway i.e. ip of the router itself</li>
+                                        <li>This specifies that if a machines makes a request to another machine not available in the LAN so request is forwarded to the Gateway and then the router sends the packets to other subnets or internet.</li>
+                                        <li>This allows local machines to access internet or conneting to other networks.</li>
+                                    </ul>
+                                </ol>
+                            </code>
+                        </div>
+                },
+                {
+                    id: 1019,
+                    question: "Explain setting up firewall with iptables. ",
+                    Answer:
+                        <div className="pl-4 bg-slate-600 rounded-md">
+                            <code>
+                                <ol className="list-inside list-decimal">
+                                    <li>iptables is a command line firewall tool for linux.</li>
+                                    <li>It it used to filter network traffic entering or leaving system based on rules.</li>
+                                    <li>Rules decide which packets are allowed, rejected or modified etc.</li>
+                                    <li>Rules are grouped into chains:</li>
+                                    <ul className="list-inside list-disc ml-4">
+                                        <li><span className="text-black bg-slate-200 rounded px-1">INPUT chain</span> : it is a group of rules for traffic that comes and destined to the system itself.</li>
+                                        <li><span className="text-black bg-slate-200 rounded px-1">OUTPUT chain</span> : it is a group of rules for traffic that goes out of the system.</li>
+                                        <li><span className="text-black bg-slate-200 rounded px-1">FORWARD chain</span> : it is a group of rules for traffic that passes through our system eg. port forwarding, gateway.</li>
+                                    </ul>
+                                    <li>There are multiple tables that consists of different chains:</li>
+                                    <ul className="list-inside list-disc ml-4">
+                                        <li><span className="text-black bg-slate-200 rounded px-1">filter table</span> : for packet filtering</li>
+                                        <li><span className="text-black bg-slate-200 rounded px-1">nat table</span> : for port forwarding</li>
+                                        <li><span className="text-black bg-slate-200 rounded px-1">mandle table</span> : for packet modification</li>
+                                    </ul>
+                                    <li>To view the firewall rules we can run <span className="text-black bg-slate-200 rounded px-1">sudo iptables -L -n -v --line-numbers</span>. This command lists all the rules with details and line numbers.</li>
+                                    <li>For adding a new rule we can run <span className="text-black bg-slate-200 rounded px-1">sudo iptables -A INPUT -p tcp --dport 8080 -j ACCEPT</span>. This sets a rule of INPUT chain to accept request for tcp protocol on port 8080</li>
+                                    <li>For deleting rule we can run <span className="text-black bg-slate-200 rounded px-1">sudo iptables -D INPUT 1</span>. Here first view the tables using command above see the chain name and line number of rule which you want to delete and pass here.</li>
+                                </ol>
+                            </code>
+                        </div>
+                },
+                {
+                    id: 1020,
+                    question: "Explain managing file permissions in redhat.",
+                    Answer:
+                        <div className="pl-4 bg-slate-600 rounded-md">
+                            <code>
+                                <ol className="list-inside list-decimal">
+                                    <li>RHEL follows a UNIX like approach for managing file permissions.</li>
+                                    <li>Here each file/directory can have 3 types of permissions:</li>
+                                    <ul className="ml-4 list-disc list-inside">
+                                        <li><span className="text-black bg-slate-200 rounded px-1">Read (r)</span> : It specifies if someone can open a file.</li>
+                                        <li><span className="text-black bg-slate-200 rounded px-1">Write (w)</span> : It specifies if someone can change file contents.</li>
+                                        <li><span className="text-black bg-slate-200 rounded px-1">Execute (e)</span> : It specifies if someone can run the file as a program.</li>
+                                    </ul>
+                                    <li>Each file has three set of permissions:</li>
+                                    <ul className="ml-4 list-disc list-inside">
+                                        <li><span className="text-black bg-slate-200 rounded px-1">Owner</span> : rwe for file owner.</li>
+                                        <li><span className="text-black bg-slate-200 rounded px-1">Group</span> : rwe for users in group which the file belongs to.</li>
+                                        <li><span className="text-black bg-slate-200 rounded px-1">Other</span> : rwe for any other user who is nether owner not inside the required group.</li>
+                                    </ul>
+                                    <li>To see permissions of file we can use <span className="text-black bg-slate-200 rounded px-1">ls -l</span> in the directory where file is stored.</li>
+                                    <li>To change file permissions we can use <span className="text-black bg-slate-200 rounded px-1">chmod u=rwe, g=rwe, o=rwe sample.txt</span>. It uses symbols like u for owner, g for group and o for others.</li>
+                                    <li>Another way is to use sum of digits i.e. read=4, write=2, execute=1.</li>
+                                    <li>So if i want onlu owner should be able to modify the file then <span className="text-black bg-slate-200 rounded px-1">chmod 644 sample.txt</span>. This sets <span className="text-black bg-slate-200 rounded px-1">-rw-r--r--</span> permissions where only owner can read and write while others can only read the file.</li>
+                                </ol>
+                            </code>
+                        </div>
+                }
             ]
         },
         {
